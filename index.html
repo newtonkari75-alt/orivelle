@@ -62,6 +62,7 @@
         showModal: false, 
         modalTitle: '', 
         modalType: '',
+        modalContent: '',
         currentSlide: 0,
         slides: ['images/orivelle.avif', 'images/orivelle1.avif', 'images/orivelle2.avif'],
         couponCopied: false,
@@ -106,7 +107,11 @@
                 contactReg: 'Registration',
                 contactLoc: 'Location',
                 contactSup: 'Support',
-                modalFallback: 'Content loading... Please contact support.'
+                
+                // Real Policy Content for Ads Compliance
+                txtShipping: 'Orders are processed within 24 hours. Standard delivery takes 2-3 business days depending on your location. We offer free shipping on all promotional orders today.',
+                txtGuarantee: 'We offer a 30-day satisfaction guarantee. If you are not satisfied with the product, please contact our support team within 30 days of receipt for a return authorization.',
+                txtPrivacy: 'We respect your privacy. Your personal data is used only to process your order and improve your experience. We do not sell your data to third parties. Compliant with GDPR.'
             },
             fr: {
                 link: 'https://dtnc5.doctorfoxick.com/l',
@@ -147,7 +152,11 @@
                 contactReg: 'Inscription',
                 contactLoc: 'Emplacement',
                 contactSup: 'Support',
-                modalFallback: 'Chargement du contenu... Veuillez contacter le support.'
+
+                // Real Policy Content for Ads Compliance
+                txtShipping: 'Les commandes sont traitées sous 24h. La livraison standard prend 2-3 jours ouvrables selon votre localisation. Livraison gratuite aujourd\'hui.',
+                txtGuarantee: 'Nous offrons une garantie de satisfaction de 30 jours. Si vous n\'êtes pas satisfait, contactez notre support sous 30 jours pour un retour.',
+                txtPrivacy: 'Nous respectons votre vie privée. Vos données sont utilisées uniquement pour traiter votre commande. Conforme au RGPD.'
             },
             no: {
                 link: 'https://ugf2w.doctormvp2.com/l',
@@ -188,7 +197,11 @@
                 contactReg: 'Registrering',
                 contactLoc: 'Plassering',
                 contactSup: 'Brukerstøtte',
-                modalFallback: 'Laster innhold... Vennligst kontakt support.'
+
+                // Real Policy Content for Ads Compliance
+                txtShipping: 'Bestillinger behandles innen 24 timer. Standard levering tar 2-3 virkedager. Vi tilbyr gratis frakt på alle kampanjebestillinger i dag.',
+                txtGuarantee: 'Vi tilbyr 30 dagers fornøydgaranti. Hvis du ikke er fornøyd, vennligst kontakt kundeservice innen 30 dager for retur.',
+                txtPrivacy: 'Vi respekterer ditt personvern. Dine data brukes kun til å behandle din bestilling. I samsvar med GDPR.'
             }
         },
         copyCoupon() {
@@ -203,7 +216,14 @@
         },
         openPolicy(type, title) { 
             this.modalType = type; 
-            this.modalTitle = title; 
+            this.modalTitle = title;
+            
+            // Set dynamic content based on type
+            if(type === 'shipping') this.modalContent = this.i18n[this.lang].txtShipping;
+            else if(type === 'returns') this.modalContent = this.i18n[this.lang].txtGuarantee;
+            else if(type === 'privacy') this.modalContent = this.i18n[this.lang].txtPrivacy;
+            else this.modalContent = '';
+
             this.showModal = true; 
             document.body.style.overflow = 'hidden'; 
         },
@@ -416,7 +436,8 @@
                     </div>
                 </template>
                 <template x-if="modalType !== 'contact'">
-                    <p x-text="i18n[lang].modalFallback"></p>
+                     <!-- Only shows content if specific text exists (shipping, returns, privacy), else fallback -->
+                    <p x-text="modalContent || i18n[lang].modalFallback"></p>
                 </template>
             </div>
             <div class="p-6 bg-slate-50 border-t border-slate-100 text-center">
