@@ -267,8 +267,8 @@
                 <button @click="document.getElementById('faq').scrollIntoView({behavior:'smooth'})" class="hover:text-[#24AA2F] transition-colors" x-text="i18n[lang].faq"></button>
             </nav>
 
-            <!-- Dynamic CTA Link based on Lang -->
-            <a :href="i18n[lang].link" class="bg-[#24AA2F] text-white px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#1b8023] transition-all shadow-md active:scale-95" x-text="i18n[lang].checkPrices"></a>
+            <!-- CHANGED: Header CTA now scrolls to country selector -->
+            <button @click="document.getElementById('country-selector').scrollIntoView({behavior: 'smooth'})" class="bg-[#24AA2F] text-white px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#1b8023] transition-all shadow-md active:scale-95" x-text="i18n[lang].checkPrices"></button>
         </div>
     </header>
 
@@ -294,7 +294,7 @@
                 <p class="text-lg md:text-xl text-slate-600 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0" x-text="i18n[lang].heroSub"></p>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
-                    <!-- CHANGED: Now an anchor to scroll to country selector -->
+                    <!-- CHANGED: Hero CTA now scrolls to country selector -->
                     <button @click="document.getElementById('country-selector').scrollIntoView({behavior: 'smooth'})" class="bg-[#24AA2F] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl hover:bg-[#1b8023] transition-all transform hover:scale-[1.03] active:scale-95 cta-glow text-center" x-text="i18n[lang].secureOffer"></button>
                     
                     <button @click="copyCoupon()" class="bg-white text-slate-800 border-2 border-slate-100 px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-sm hover:border-green-200 transition-all text-center relative overflow-hidden group">
@@ -394,13 +394,13 @@
 
     </main>
 
-    <!-- Floating Checkout (Mobile) - Dynamic Link -->
+    <!-- Floating Checkout (Mobile) - CHANGED: Scrolls to Country Selector -->
     <div class="fixed bottom-0 left-0 right-0 glass border-t border-slate-100 p-4 z-50 md:hidden flex items-center justify-between gap-4">
         <div class="flex flex-col text-left">
             <span class="text-[8px] text-slate-400 font-bold uppercase tracking-tighter line-through leading-none" x-text="i18n[lang].uvp"></span>
             <span class="text-xl font-black text-[#24AA2F]" x-text="i18n[lang].priceUnit"></span>
         </div>
-        <a :href="i18n[lang].link" class="flex-1 bg-[#24AA2F] text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-widest text-center shadow-lg active:scale-95 animate-pulse-soft" x-text="i18n[lang].secureOffer"></a>
+        <button @click="document.getElementById('country-selector').scrollIntoView({behavior: 'smooth'})" class="flex-1 bg-[#24AA2F] text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-widest text-center shadow-lg active:scale-95 animate-pulse-soft" x-text="i18n[lang].secureOffer"></button>
     </div>
 
     <!-- Footer -->
