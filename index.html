@@ -63,7 +63,7 @@
         modalTitle: '', 
         modalType: '',
         currentSlide: 0,
-        slides: ['https://placehold.co/600x600/ffffff/24AA2F?text=Orivelle+Product', 'https://placehold.co/600x600/ffffff/24AA2F?text=Application+Step', 'https://placehold.co/600x600/ffffff/24AA2F?text=Clearer+Results'],
+        slides: ['images/orivelle.avif', 'images/orivelle1.avif', 'images/orivelle2.avif'],
         couponCopied: false,
         lang: 'en',
         i18n: {
@@ -97,7 +97,16 @@
                 shipping: 'Shipping',
                 guarantee: 'Guarantee',
                 contact: 'Contact',
-                privacy: 'Privacy'
+                privacy: 'Privacy',
+                uvp: 'RRP 139,86€',
+                priceUnit: '9.99 € / pc',
+                footerPartner: '© 2026 Orivelle. Authorized Partner: ASTRONARA TRADING FZCO.',
+                modalClose: 'Close',
+                contactEntity: 'Entity',
+                contactReg: 'Registration',
+                contactLoc: 'Location',
+                contactSup: 'Support',
+                modalFallback: 'Content loading... Please contact support.'
             },
             fr: {
                 link: 'https://dtnc5.doctorfoxick.com/l',
@@ -129,7 +138,16 @@
                 shipping: 'Livraison',
                 guarantee: 'Garantie',
                 contact: 'Contact',
-                privacy: 'Confidentialité'
+                privacy: 'Confidentialité',
+                uvp: 'PVC 139,86€',
+                priceUnit: '9,99 € / pc',
+                footerPartner: '© 2026 Orivelle. Partenaire autorisé : ASTRONARA TRADING FZCO.',
+                modalClose: 'Fermer',
+                contactEntity: 'Entité',
+                contactReg: 'Inscription',
+                contactLoc: 'Emplacement',
+                contactSup: 'Support',
+                modalFallback: 'Chargement du contenu... Veuillez contacter le support.'
             },
             no: {
                 link: 'https://ugf2w.doctormvp2.com/l',
@@ -161,7 +179,16 @@
                 shipping: 'Frakt',
                 guarantee: 'Garanti',
                 contact: 'Kontakt',
-                privacy: 'Personvern'
+                privacy: 'Personvern',
+                uvp: 'VEIL 139,86€',
+                priceUnit: '9,99 € / stk',
+                footerPartner: '© 2026 Orivelle. Autorisert partner: ASTRONARA TRADING FZCO.',
+                modalClose: 'Lukk',
+                contactEntity: 'Enhet',
+                contactReg: 'Registrering',
+                contactLoc: 'Plassering',
+                contactSup: 'Brukerstøtte',
+                modalFallback: 'Laster innhold... Vennligst kontakt support.'
             }
         },
         copyCoupon() {
@@ -209,7 +236,7 @@
     <header class="bg-white/90 backdrop-blur-md sticky top-[32px] md:top-[34px] z-[60] py-3 border-b border-slate-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 md:px-8 flex justify-between items-center">
             <div class="flex items-center">
-                <div class="font-black text-2xl tracking-tighter text-[#24AA2F]">ORIVELLE<span class="text-slate-300 font-light">®</span></div>
+                <img src="images/orivelle-logo.svg" alt="Orivelle" class="h-6 md:h-8" onerror="this.src='https://placehold.co/120x30/24AA2F/FFFFFF?text=ORIVELLE';">
             </div>
             
             <nav class="hidden md:flex items-center gap-8 text-xs font-bold text-slate-500 uppercase tracking-widest">
@@ -304,7 +331,7 @@
 
         </section>
 
-        <!-- COUNTRY SELECTOR: Updated with Direct Links -->
+        <!-- COUNTRY SELECTOR: Direct Links & Flag Images -->
         <section class="max-w-4xl mx-auto px-4 mb-24 text-center">
             <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-8 font-serif-display" x-text="i18n[lang].selectCountry"></h2>
             
@@ -346,8 +373,8 @@
     <!-- Floating Checkout (Mobile) - Dynamic Link -->
     <div class="fixed bottom-0 left-0 right-0 glass border-t border-slate-100 p-4 z-50 md:hidden flex items-center justify-between gap-4">
         <div class="flex flex-col text-left">
-            <span class="text-[8px] text-slate-400 font-bold uppercase tracking-tighter line-through leading-none">UVP 139,86€</span>
-            <span class="text-xl font-black text-[#24AA2F]">9,99 € <span class="text-[8px] text-slate-500">/ Stk.</span></span>
+            <span class="text-[8px] text-slate-400 font-bold uppercase tracking-tighter line-through leading-none" x-text="i18n[lang].uvp"></span>
+            <span class="text-xl font-black text-[#24AA2F]" x-text="i18n[lang].priceUnit"></span>
         </div>
         <a :href="i18n[lang].link" class="flex-1 bg-[#24AA2F] text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-widest text-center shadow-lg active:scale-95 animate-pulse-soft" x-text="i18n[lang].secureOffer"></a>
     </div>
@@ -364,9 +391,7 @@
 
             <p class="text-[10px] text-slate-400 max-w-3xl mx-auto leading-loose italic border-t border-slate-50 pt-10" x-text="i18n[lang].footerNote"></p>
 
-            <div class="mt-10 text-[9px] font-bold text-slate-300">
-                &copy; 2026 Orivelle. Authorized Partner: ASTRONARA TRADING FZCO.
-            </div>
+            <div class="mt-10 text-[9px] font-bold text-slate-300" x-text="i18n[lang].footerPartner"></div>
         </div>
     </footer>
 
@@ -384,18 +409,18 @@
             <div class="p-8 overflow-y-auto scrollbar-hide flex-grow text-sm text-slate-600 leading-relaxed">
                 <template x-if="modalType === 'contact'">
                     <div>
-                        <p class="mb-4"><strong>Entity:</strong> ASTRONARA TRADING - FZCO</p>
-                        <p class="mb-4"><strong>Registration:</strong> DSO-FZCO-37204</p>
-                        <p class="mb-4"><strong>Location:</strong> DDP A2 BUILDING, DSO-IFZA, Dubai UAE.</p>
-                        <p class="mb-4"><strong>Support:</strong> support@tryorivelle.com</p>
+                        <p class="mb-4"><strong x-text="i18n[lang].contactEntity + ':'"></strong> ASTRONARA TRADING - FZCO</p>
+                        <p class="mb-4"><strong x-text="i18n[lang].contactReg + ':'"></strong> DSO-FZCO-37204</p>
+                        <p class="mb-4"><strong x-text="i18n[lang].contactLoc + ':'"></strong> DDP A2 BUILDING, DSO-IFZA, Dubai UAE.</p>
+                        <p class="mb-4"><strong x-text="i18n[lang].contactSup + ':'"></strong> support@tryorivelle.com</p>
                     </div>
                 </template>
                 <template x-if="modalType !== 'contact'">
-                    <p>Content loading... Please contact our support for detailed information in your language.</p>
+                    <p x-text="i18n[lang].modalFallback"></p>
                 </template>
             </div>
             <div class="p-6 bg-slate-50 border-t border-slate-100 text-center">
-                <button @click="closePolicy()" class="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-900">Close</button>
+                <button @click="closePolicy()" class="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-900" x-text="i18n[lang].modalClose"></button>
             </div>
         </div>
     </div>
